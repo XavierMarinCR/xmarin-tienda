@@ -1,4 +1,4 @@
-package com.techShop.tienda.repository;
+ package com.techShop.tienda.repository;
 
 import com.techShop.tienda.domain.Categoria;
 import java.util.List;
