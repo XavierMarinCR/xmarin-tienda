@@ -38,14 +38,25 @@ public class ProjectConfig implements WebMvcConfigurer {
         return resolver;
     }
 
+//    @Bean
+//    public LocaleResolver localeResolver() {
+//        var slr = new SessionLocaleResolver();
+//        slr.setDefaultLocale(Locale.getDefault());
+//        slr.setLocaleAttributeName("session.current.locale");
+//        slr.setTimeZoneAttributeName("session.current.timezone");
+//        return slr;
+//    }
+    
     @Bean
     public LocaleResolver localeResolver() {
         var slr = new SessionLocaleResolver();
-        slr.setDefaultLocale(Locale.getDefault());
+        slr.setDefaultLocale(Locale.of("es", "CR"));
         slr.setLocaleAttributeName("session.current.locale");
         slr.setTimeZoneAttributeName("session.current.timezone");
         return slr;
     }
+    
+    
 
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {

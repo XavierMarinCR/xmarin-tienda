@@ -5,6 +5,7 @@ import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import lombok.Data;
+import java.util.Date;
 
 @Data
 @Entity
@@ -39,6 +40,14 @@ public class Producto implements Serializable {
     @Column(name = "ruta_imagen", length = 1024)
     private String rutaImagen;
     private boolean activo;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "fecha_creacion", insertable = false, updatable = false)
+    private Date fechaCreacion;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "fecha_modificacion", insertable = false, updatable = false)
+    private Date fechaModificacion;
     
     @ManyToOne
     @JoinColumn (name = "id_categoria")
