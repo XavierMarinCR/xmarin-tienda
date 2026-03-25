@@ -12,7 +12,7 @@
         <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
         <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-    </head>
+    </head>5678
 
     <!-- Fragmento #2  define el encabezado de las páginas, en concreto el menú y enlaces rápidos -->
     <header th:fragment="header" class="header">
@@ -78,7 +78,8 @@
                     <ul class="navbar-nav" sec:authorize="isAuthenticated()">
                         <li class="nav-item my-auto">
                             <a class="nav-link">
-                                <i class="fas fa-user"></i>
+                                <img th:src="@{${session.imagenUsuario}}"
+                                     alt="your image" height="40" class="rounded-circle"/>
                                 <span sec:authentication="name" class="ms-1"></span>
                             </a>
                         </li>
