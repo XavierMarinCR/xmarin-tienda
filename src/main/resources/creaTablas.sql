@@ -110,7 +110,7 @@ create table venta (
 -- Tabla de roles
 create table rol (
   id_rol INT NOT NULL AUTO_INCREMENT,
-  rol varchar(20) unique,
+  nombre_rol varchar(20) unique,
   fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   primary key (id_rol))
@@ -126,11 +126,11 @@ create table usuario_rol (
   foreign key fk_usuarioRol_usuario (id_usuario) references usuario(id_usuario),
   foreign key fk_usuarioRol_rol (id_rol) references rol(id_rol))
   ENGINE = InnoDB;
-
+SELECT * FROM usuario_rol;
 -- Tabla de rutas
 CREATE TABLE ruta (
     id_ruta INT AUTO_INCREMENT NOT NULL,
-    ruta VARCHAR(255) NOT NULL,
+    ruta_detalle VARCHAR(255) NOT NULL,
     id_rol INT NULL,
     requiere_rol boolean NOT NULL DEFAULT TRUE,
   fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -139,6 +139,8 @@ CREATE TABLE ruta (
     PRIMARY KEY (id_ruta),
     FOREIGN KEY (id_rol) REFERENCES rol(id_rol))
     ENGINE = InnoDB;
+
+ SELECT * FROM ruta;
 
 -- Tabla de constantes de la aplicación
 CREATE TABLE constante (
@@ -215,14 +217,14 @@ INSERT INTO venta (id_factura,id_producto,precio_historico,cantidad) values
 (6,10,15000,3);
 
 -- Inserción de roles
-insert into rol (rol) values ('ADMIN'), ('VENDEDOR'), ('USER');
+insert into rol (nombre_rol) values ('ADMIN'), ('VENDEDOR'), ('USER');
 
 -- ASignación de roles a usuarios
 insert into usuario_rol (id_usuario, id_rol) values
  (1,1), (1,2), (1,3),(2,2),(2,3),(3,3);
 
 -- Inserción de rutas con roles específicos
-INSERT INTO ruta (ruta, id_rol) VALUES 
+INSERT INTO ruta (ruta_detalle, id_rol) VALUES 
 ('/producto/nuevo', 1),
 ('/producto/guardar', 1),
 ('/producto/modificar/**', 1),
@@ -233,8 +235,8 @@ INSERT INTO ruta (ruta, id_rol) VALUES
 ('/categoria/eliminar/**', 1),
 ('/usuario/**', 1),
 ('/constante/**', 1),
-('/role/**', 1),
-('/usuario_role/**', 1),
+('/rol/**', 1),
+('/usuario_rol/**', 1),
 ('/ruta/**', 1),
 ('/producto/listado', 2),
 ('/categoria/listado', 2),
@@ -244,7 +246,7 @@ INSERT INTO ruta (ruta, id_rol) VALUES
 ('/facturar/carrito', 3);
 
 -- Inserción de rutas que no requieren rol
-INSERT INTO ruta (ruta,requiere_rol) VALUES 
+INSERT INTO ruta (ruta_detalle,requiere_rol) VALUES 
 ('/',false),
 ('/index',false),
 ('/errores/**',false),
@@ -270,3 +272,6 @@ INSERT INTO constante (atributo,valor) VALUES
 ('app.paypal.cancel-url','/paypal/pago_cancel'),
 ('app.paypal.cancel-error','/paypal/pago_error'),
 ('app.paypal.cancel-success','/paypal/pago_success');
+
+USE techshop;
+SELECT * FROM rol;
